@@ -15,7 +15,7 @@ template <typename K, typename V> class LRUCache
   using Value = V;
   LRUCache(size_t capacity)
     : capacity(capacity){};
-  ~LRUCache();
+  ~LRUCache() = default;
   Value &
   get(const Key & key)
   {
@@ -30,7 +30,7 @@ template <typename K, typename V> class LRUCache
   }
 
   void
-  put(const Key key, const Value value)
+  put(const Key key, const Value value) noexcept
   {
     if (map.find(key) != map.end())
       {

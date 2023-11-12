@@ -4,7 +4,7 @@ add_requires("Catch 3.4.0")
 
 target("cache_lite")
     set_kind("headeronly")
-    add_files("src/*.cpp")
+    add_files("src/*.h")
 
 target("test")
   set_group("test")
