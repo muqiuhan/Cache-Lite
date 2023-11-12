@@ -1,0 +1,2 @@
+(library
+ (name cache_lite_ocaml))

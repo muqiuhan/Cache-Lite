@@ -1,0 +1,2 @@
+(test
+ (name cache_lite_ocaml))

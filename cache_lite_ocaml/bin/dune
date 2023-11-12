@@ -1,0 +1,4 @@
+(executable
+ (public_name cache_lite_ocaml)
+ (name main)
+ (libraries cache_lite_ocaml))
