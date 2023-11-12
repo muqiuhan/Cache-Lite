@@ -1,0 +1,37 @@
+name: Cache-Lite.OCaml
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+        ocaml-compiler:
+          - 4.14.x
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use OCaml ${{ matrix.ocaml-compiler }}
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-compiler: ${{ matrix.ocaml-compiler }}
+
+      - name: Install deps
+        working-directory: Cache-Lite.OCaml
+        run: opam install . --deps-only --with-doc --with-test
+
+      - name: Build
+        working-directory: Cache-Lite.OCaml
+        run: opam exec -- make build
+
+      - name: Test
+        working-directory: Cache-Lite.OCaml
+        run: opam exec -- make test

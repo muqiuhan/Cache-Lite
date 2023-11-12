@@ -2,6 +2,10 @@ on: [push, pull_request]
 
 name: Cache-Lite.Rust
 
+defaults:
+  run:
+    working-directory: Cache-Lite.Rust
+
 jobs:
   check:
     name: Check
@@ -18,9 +22,7 @@ jobs:
           override: true
 
       - name: Run cargo check
-        working-directory: Cache-Lite.Rust
         uses: actions-rs/cargo@v1
-        continue-on-error: true  # WARNING: only for this example, remove it!
         with:
           command: check
 
@@ -39,7 +41,6 @@ jobs:
           override: true
 
       - name: Run cargo test
-        working-directory: Cache-Lite.Rust
         uses: actions-rs/cargo@v1
         with:
           command: test
@@ -60,14 +61,12 @@ jobs:
           components: rustfmt, clippy
 
       - name: Run cargo fmt
-        working-directory: Cache-Lite.Rust
         uses: actions-rs/cargo@v1
         with:
           command: fmt
           args: --all -- --check
 
       - name: Run cargo clippy
-        working-directory: Cache-Lite.Rust
         uses: actions-rs/cargo@v1
         with:
           command: clippy
