@@ -1,28 +1,3 @@
-<h1 align="center"> Cache-Lite </h1>
-
-<p align="center"> An extremely lightweight cache framework in any programming language/platform. </p>
-
-## Introduction
-This project provides minimalist cache implementations in various languages/platforms:
-
-- [x] JVM (Scala)
-- [ ] .NET (F#)
-- [ ] OCaml
-- [ ] C/C++
-- [ ] Javascript (Rescript)
-- [ ] Rust
-- [ ] Golang
-- [ ] Python
-
-__Algorithms:__
-- Perpetual
-- LRU
-- Expirable
-- FIFO
-- Soft
-- Weak
-
-## LICENSE
 The MIT License (MIT)
 
 Copyright (c) 2023 Muqiu Han
