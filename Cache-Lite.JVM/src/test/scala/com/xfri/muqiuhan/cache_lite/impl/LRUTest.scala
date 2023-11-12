@@ -24,12 +24,34 @@
 
 package com.xfri.muqiuhan.cache_lite.impl
 
-class PerpetualTest extends munit.FunSuite:
-  val cache = Perpetual[Int, Int]()
+import com.xfri.muqiuhan.cache_lite.GenericCache
+import java.util.Random
 
-  for (i <- 0 to 99) do cache.set(i, i)
+class LRUTest extends munit.FunSuite:
 
-  test("Should keep all entries") {
-    for (i <- 0 to 99) do
-      assertNotEquals[Option[Int], Option[Int]](cache.get(i), None)
+  test("Should only cache size items") {
+    val cache = LRU[Int, Int](Perpetual(), 31)
+    for (i <- 0 to 99) do cache.set(i, i)
+    assertEquals[Int, Int](cache.size(), 31)
+  }
+
+  test("Should cache items with access order") {
+    val cache = LRU[Int, Int](Perpetual(), 31)
+    for (i <- 0 to 30) do cache.set(i, i)
+
+    val random = Random()
+    val indices = Array.fill[Int](30)(random.nextInt(31))
+
+    indices.foreach(index => cache.get(index))
+    indices.foreach(index =>
+      assertEquals[Int, Int](index, cache.get(index).get)
+    )
+  }
+
+  test("Should remove entry") {
+    val cache = LRU[Int, Int](Perpetual(), 31)
+    for (i <- 0 to 30) do cache.set(i, i)
+    assertNotEquals[Option[Int], Option[Int]](cache.get(25), None)
+    val _ = cache.remove(25)
+    assertEquals[Option[Int], Option[Int]](cache.get(25), None)
   }
