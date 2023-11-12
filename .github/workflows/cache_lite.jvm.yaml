@@ -41,9 +41,9 @@ jobs:
           cache: sbt
 
       - name: Build
-        working-directory: cachelite.jvm
+        working-directory: Cache-Lite.JVM
         run: sbt compile
 
       - name: Test
-        working-directory: cachelite.jvm
+        working-directory: Cache-Lite.JVM
         run: sbt test
