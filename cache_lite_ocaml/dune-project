@@ -1,26 +1,26 @@
 (lang dune 3.11)
 
-(name cache_lite_ocaml)
+(name cache_lite)
 
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github muqiuhan/cache-lite))
 
-(authors "Author Name")
+(authors "Muqiu Han")
 
-(maintainers "Maintainer Name")
+(maintainers "Muqiu Han")
 
-(license LICENSE)
+(license MIT)
 
-(documentation https://url/to/documentation)
+(documentation https://github.com/muqiuhan/Cache-Lite/tree/main/cache_lite_ocaml)
 
 (package
- (name cache_lite_ocaml)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (name cache_lite)
+ (synopsis "An extremely lightweight cache framework for Scala/JVM")
+ (description "An extremely lightweight cache framework for Scala/JVM")
  (depends ocaml dune)
  (tags
-  (topics "to describe" your project)))
+  (cache caching "cache framework")))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
