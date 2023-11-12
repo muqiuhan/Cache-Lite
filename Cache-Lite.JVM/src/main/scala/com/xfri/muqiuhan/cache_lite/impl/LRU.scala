@@ -31,51 +31,45 @@ import java.util.Map.Entry
 /** [LRU] cache flushes items that are **Least Recently Used** and keeps
   * [minimalSize] items at most.
   */
-abstract class LRU[K, V](
+class LRU[K, V](
     delegate: GenericCache[K, V],
     minimalSize: Int = LRU.DEFAULT_SIZE
-) extends GenericCache[K, V] {
+) extends GenericCache[K, V]:
   private var eldestKeyToRemove: Option[K] = None
 
   private val cache =
     new LinkedHashMap[K, Boolean](minimalSize, 0.75f, true) {
       override protected def removeEldestEntry(
           eldest: Entry[K, Boolean]
-      ): Boolean = {
-        val tooManyCachedItems = size > minimalSize
+      ): Boolean =
+        val tooManyCachedItems = this.size > minimalSize
 
-        if (tooManyCachedItems) {
-          eldestKeyToRemove = Some(eldest.getKey())
-        }
+        if tooManyCachedItems then eldestKeyToRemove = Some(eldest.getKey())
         tooManyCachedItems
-      }
     }
 
-  override def get(key: K): Option[V] = {
-    cache.get(key).asInstanceOf[Boolean | Null] match {
+  override def size(): Int = cache.size()
+
+  override def get(key: K): Option[V] =
+    cache.get(key).asInstanceOf[Boolean | Null] match
       case v: Boolean => delegate.get(key)
       case _          => None
-    }
-  }
 
-  override def set(key: K, value: V): Unit = {
+  override def set(key: K, value: V): Unit =
     delegate.set(key, value)
     cycleCache(key)
-  }
 
-  override def clear(): Unit = {
+  override def clear(): Unit =
     cache.clear()
     delegate.clear()
-  }
 
-  private def cycleCache(key: K): Unit = {
+  override def remove(key: K): Option[V] = delegate.remove(key)
+
+  private def cycleCache(key: K): Unit =
     cache.put(key, LRU.PRESENT)
     eldestKeyToRemove.foreach(delegate.remove(_))
     eldestKeyToRemove = None
-  }
-}
 
-object LRU {
+object LRU:
   val DEFAULT_SIZE: Int = 1024
   val PRESENT: Boolean = true
-}

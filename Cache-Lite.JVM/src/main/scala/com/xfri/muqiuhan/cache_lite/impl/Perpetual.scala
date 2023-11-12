@@ -30,27 +30,23 @@ import com.xfri.muqiuhan.cache_lite.GenericCache;
 /** [PerpetualCache] caches the items perpetually unless they're manually
   * [remove]ed.
   */
-class Perpetual[K, V] extends GenericCache[K, V] {
+class Perpetual[K, V] extends GenericCache[K, V]:
   private val cache = HashMap[K, V]()
 
-  override val size: Int = cache.size()
+  override def size(): Int = cache.size()
 
-  override def set(key: K, value: V): Unit = {
+  override def set(key: K, value: V): Unit =
     cache.put(key, value)
-  }
 
-  override def remove(key: K): V = {
-    cache.remove(key)
-  }
-
-  override def get(key: K): Option[V] = {
-    cache.get(key) match {
+  override def remove(key: K): Option[V] =
+    cache.remove(key) match
       case value: V => Some(value)
       case null     => None
-    }
-  }
 
-  override def clear(): Unit = {
+  override def get(key: K): Option[V] =
+    cache.get(key) match
+      case value: V => Some(value)
+      case null     => None
+
+  override def clear(): Unit =
     cache.clear()
-  }
-}
