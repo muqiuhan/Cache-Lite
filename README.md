@@ -6,6 +6,7 @@
 This project provides minimalist cache implementations in various languages/platforms:
 
 - [x] JVM (Scala)
+    ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/cache_lite.jvm.yaml/badge.svg)
 - [ ] .NET (F#)
 - [ ] OCaml
 - [ ] C/C++

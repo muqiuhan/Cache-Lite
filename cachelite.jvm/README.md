@@ -2,6 +2,8 @@
 
 <p align="center"> An extremely lightweight cache framework for Scala/JVM </p>
 
+<p align="center"> <img src="https://github.com/muqiuhan/cache-lite/actions/workflows/cache_lite.jvm.yaml/badge.svg" alt="ci"> </p>
+
 <p align="center"> This project is a part of <a href=https://github.com/Cache-Lite> Cache-Lite </a>, which is an extremely lightweight cache framework in any programming language/platform. </p>
 
 ## Introduction
