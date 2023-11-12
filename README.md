@@ -1,3 +1,5 @@
+<p align="center"> <img src="./.github/logo.png" height="150px" alt="Logo at ./.github/logo.png"> </p>
+
 <h1 align="center"> Cache-Lite </h1>
 
 <p align="center"> An extremely lightweight cache framework in any programming language/platform. </p>
