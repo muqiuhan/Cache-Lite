@@ -22,26 +22,31 @@
  * SOFTWARE.
  */
 
-package com.xfri.muqiuhan.cache_lite
+package com.xfri.muqiuhan.cache_lite.impl
 
-/** A Generic K,V [GenericCache] defines the basic operations to a cache. */
-trait GenericCache[K, V]:
+import com.xfri.muqiuhan.cache_lite.GenericCache
+import java.util.concurrent.TimeUnit
 
-  /** The number of the items that are currently cached. */
-  def size(): Int
+class ExpirableTest extends munit.FunSuite:
+  test("Should expire") {
+    val cache = Expirable[Int, Int](Perpetual(), TimeUnit.SECONDS.toMillis(1))
+    for (i <- 0 to 99) do cache.set(i, i)
 
-  /** Cache a [value] with a given [key] */
-  def set(key: K, value: V): Unit
+    Thread.sleep(TimeUnit.SECONDS.toMillis(1))
+    assertEquals[Int, Int](cache.size(), 0)
+  }
 
-  /** Get the cached value of a given [key], or null if it's not cached or
-    * evicted.
-    */
-  def get(key: K): Option[V]
+  test("Should expire multiple times") {
+    val cache = Expirable[Int, Int](Perpetual(), TimeUnit.SECONDS.toMillis(1))
+    for (i <- 0 to 99) do cache.set(i, i)
 
-  /** Remove the value of the [key] from the cache, and return the removed
-    * value, or null if it's not cached at all.
-    */
-  def remove(key: K): Option[V]
+    Thread.sleep(TimeUnit.SECONDS.toMillis(1))
+    Thread.sleep(TimeUnit.SECONDS.toMillis(1))
+    assertEquals[Int, Int](cache.size(), 0)
 
-  /** Remove all the items in the cache. */
-  def clear(): Unit
+    cache.set(1, 1)
+    assertEquals[Int, Int](cache.size(), 1)
+
+    Thread.sleep(TimeUnit.SECONDS.toMillis(1))
+    assertEquals[Int, Int](cache.size(), 0)
+  }

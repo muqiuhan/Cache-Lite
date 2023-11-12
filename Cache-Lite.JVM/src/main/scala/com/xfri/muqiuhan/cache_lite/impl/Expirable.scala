@@ -25,51 +25,39 @@
 package com.xfri.muqiuhan.cache_lite.impl
 
 import com.xfri.muqiuhan.cache_lite.GenericCache
-import java.util.LinkedHashMap
-import java.util.Map.Entry
+import java.util.concurrent.TimeUnit
 
-/** [LRU] cache flushes items that are **Least Recently Used** and keeps
-  * [minimalSize] items at most.
+/** [ExpirableCache] flushes the items whose life time is longer than
+  * [flushInterval].
   */
-class LRU[K, V](
+class Expirable[K, V](
     delegate: GenericCache[K, V],
-    minimalSize: Int = LRU.DEFAULT_SIZE
+    flushInterval: Long = Expirable.DEFAULT_FLUSH_INTERVAL
 ) extends GenericCache[K, V]:
-  private var eldestKeyToRemove: Option[K] = None
+  private var lastFlushTime = System.nanoTime()
 
-  private val cache =
-    new LinkedHashMap[K, Boolean](minimalSize, 0.75f, true) {
-      override protected def removeEldestEntry(
-          eldest: Entry[K, Boolean]
-      ): Boolean =
-        val tooManyCachedItems = this.size > minimalSize
+  private def recycle(): Unit =
+    if (System.nanoTime() - lastFlushTime) >= TimeUnit.MILLISECONDS.toNanos(
+        flushInterval
+      )
+    then
+      delegate.clear()
+      lastFlushTime = System.nanoTime()
 
-        if tooManyCachedItems then eldestKeyToRemove = Some(eldest.getKey())
-        tooManyCachedItems
-    }
+  override def size(): Int =
+    recycle()
+    delegate.size()
 
-  override def size(): Int = cache.size()
+  override def remove(key: K): Option[V] =
+    recycle()
+    delegate.remove(key)
 
   override def get(key: K): Option[V] =
-    cache.get(key).asInstanceOf[Boolean | Null] match
-      case v: Boolean => delegate.get(key)
-      case _          => None
+    recycle()
+    delegate.get(key)
 
-  override def set(key: K, value: V): Unit =
-    delegate.set(key, value)
-    cycleCache(key)
+  override def clear(): Unit = delegate.clear()
+  override def set(key: K, value: V): Unit = delegate.set(key, value)
 
-  override def clear(): Unit =
-    cache.clear()
-    delegate.clear()
-
-  override def remove(key: K): Option[V] = delegate.remove(key)
-
-  private def cycleCache(key: K): Unit =
-    cache.put(key, LRU.PRESENT)
-    eldestKeyToRemove.foreach(delegate.remove(_))
-    eldestKeyToRemove = None
-
-object LRU:
-  val DEFAULT_SIZE: Int = 1024
-  val PRESENT: Boolean = true
+object Expirable:
+  val DEFAULT_FLUSH_INTERVAL: Long = TimeUnit.MINUTES.toMillis(1)

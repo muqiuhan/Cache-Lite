@@ -22,26 +22,36 @@
  * SOFTWARE.
  */
 
-package com.xfri.muqiuhan.cache_lite
+package com.xfri.muqiuhan.cache_lite.impl
 
-/** A Generic K,V [GenericCache] defines the basic operations to a cache. */
-trait GenericCache[K, V]:
+import com.xfri.muqiuhan.cache_lite.GenericCache
+import java.util.Random
 
-  /** The number of the items that are currently cached. */
-  def size(): Int
+class LRUTest extends munit.FunSuite:
 
-  /** Cache a [value] with a given [key] */
-  def set(key: K, value: V): Unit
+  test("Should only cache size items") {
+    val cache = LRU[Int, Int](Perpetual(), 31)
+    for (i <- 0 to 99) do cache.set(i, i)
+    assertEquals[Int, Int](cache.size(), 31)
+  }
 
-  /** Get the cached value of a given [key], or null if it's not cached or
-    * evicted.
-    */
-  def get(key: K): Option[V]
+  test("Should cache items with access order") {
+    val cache = LRU[Int, Int](Perpetual(), 31)
+    for (i <- 0 to 30) do cache.set(i, i)
 
-  /** Remove the value of the [key] from the cache, and return the removed
-    * value, or null if it's not cached at all.
-    */
-  def remove(key: K): Option[V]
+    val random = Random()
+    val indices = Array.fill[Int](30)(random.nextInt(31))
 
-  /** Remove all the items in the cache. */
-  def clear(): Unit
+    indices.foreach(index => cache.get(index))
+    indices.foreach(index =>
+      assertEquals[Int, Int](index, cache.get(index).get)
+    )
+  }
+
+  test("Should remove entry") {
+    val cache = LRU[Int, Int](Perpetual(), 31)
+    for (i <- 0 to 30) do cache.set(i, i)
+    assertNotEquals[Option[Int], Option[Int]](cache.get(25), None)
+    val _ = cache.remove(25)
+    assertEquals[Option[Int], Option[Int]](cache.get(25), None)
+  }

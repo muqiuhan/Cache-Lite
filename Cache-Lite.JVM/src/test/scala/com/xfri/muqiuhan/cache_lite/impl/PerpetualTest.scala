@@ -22,26 +22,14 @@
  * SOFTWARE.
  */
 
-package com.xfri.muqiuhan.cache_lite
+package com.xfri.muqiuhan.cache_lite.impl
 
-/** A Generic K,V [GenericCache] defines the basic operations to a cache. */
-trait GenericCache[K, V]:
+class PerpetualTest extends munit.FunSuite:
+  val cache = Perpetual[Int, Int]()
 
-  /** The number of the items that are currently cached. */
-  def size(): Int
+  for (i <- 0 to 99) do cache.set(i, i)
 
-  /** Cache a [value] with a given [key] */
-  def set(key: K, value: V): Unit
-
-  /** Get the cached value of a given [key], or null if it's not cached or
-    * evicted.
-    */
-  def get(key: K): Option[V]
-
-  /** Remove the value of the [key] from the cache, and return the removed
-    * value, or null if it's not cached at all.
-    */
-  def remove(key: K): Option[V]
-
-  /** Remove all the items in the cache. */
-  def clear(): Unit
+  test("Should keep all entries") {
+    for (i <- 0 to 99) do
+      assertNotEquals[Option[Int], Option[Int]](cache.get(i), None)
+  }

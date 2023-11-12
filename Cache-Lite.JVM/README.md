@@ -9,11 +9,14 @@
 ## Introduction
 
 - [x] Perpetual
-- [ ] LRU
+- [x] LRU
 - [ ] Expirable
 - [ ] FIFO
 - [ ] Soft
 - [ ] Weak
+
+## Reference
+- [https://github.com/kezhenxu94/cache-lite](https://github.com/kezhenxu94/cache-lite)
 
 ## LICENSE
 The MIT License (MIT)
