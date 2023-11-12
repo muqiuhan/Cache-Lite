@@ -17,6 +17,7 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
+        working-directory: Cache-Lite.NET
         run: dotnet restore
       - name: Build
         working-directory: Cache-Lite.NET
