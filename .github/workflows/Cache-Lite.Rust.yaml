@@ -7,23 +7,18 @@ defaults:
     working-directory: Cache-Lite.Rust
 
 jobs:
-  clippy:
-    name: Clippy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: moonrepo/setup-rust@v1
-      - run: cargo clippy -- -D warnings
-
-  test:
-    name: Clippy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: moonrepo/setup-rust@v1
-      - run: cargo test
-
   build:
-    name: Clippy
     runs-on: ubuntu-latest
     steps:
-      - uses: moonrepo/setup-rust@v1
-      - run: cargo build
+      - uses: actions/checkout@v3
+      - name: Setup
+        uses: moonrepo/setup-rust@v1
+
+      - name: Clippy
+        run: cargo clippy -- -D warnings
+
+      - name: Test
+        run: cargo test
+
+      - name: Build
+        run: cargo build
