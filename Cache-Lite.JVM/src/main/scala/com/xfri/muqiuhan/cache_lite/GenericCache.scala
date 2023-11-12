@@ -36,7 +36,7 @@ trait GenericCache[K, V] {
   /** Get the cached value of a given [key], or null if it's not cached or
     * evicted.
     */
-  def get(key: K): V
+  def get(key: K): Option[V]
 
   /** Remove the value of the [key] from the cache, and return the removed
     * value, or null if it's not cached at all.

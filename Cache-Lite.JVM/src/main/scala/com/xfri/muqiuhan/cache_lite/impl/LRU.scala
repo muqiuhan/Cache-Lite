@@ -51,9 +51,11 @@ abstract class LRU[K, V](
       }
     }
 
-  override def get(key: K): V = {
-    cache.get(key)
-    delegate.get(key)
+  override def get(key: K): Option[V] = {
+    cache.get(key).asInstanceOf[Boolean | Null] match {
+      case v: Boolean => delegate.get(key)
+      case _          => None
+    }
   }
 
   override def set(key: K, value: V): Unit = {

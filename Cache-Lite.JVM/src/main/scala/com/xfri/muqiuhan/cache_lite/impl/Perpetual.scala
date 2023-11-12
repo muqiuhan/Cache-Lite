@@ -43,8 +43,11 @@ class Perpetual[K, V] extends GenericCache[K, V] {
     cache.remove(key)
   }
 
-  override def get(key: K): V = {
-    cache.get(key)
+  override def get(key: K): Option[V] = {
+    cache.get(key) match {
+      case value: V => Some(value)
+      case null     => None
+    }
   }
 
   override def clear(): Unit = {
