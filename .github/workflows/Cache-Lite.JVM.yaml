@@ -1,4 +1,4 @@
-name: cachelite.jvm
+name: Cache-Lite.JVM
 
 on:
   pull_request:
