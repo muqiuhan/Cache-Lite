@@ -7,13 +7,12 @@
 ## Introduction
 This project provides minimalist cache implementations in various languages/platforms:
 
-- [x] JVM (Scala)
-    ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.JVM.yaml/badge.svg)
-- [ ] .NET (F#)
-- [ ] OCaml
-- [ ] C/C++
+- [x] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.JVM.yaml/badge.svg) JVM (Scala)
+- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.NET.yaml/badge.svg) .NET (F#)
+- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.OCaml.yaml/badge.svg) OCaml
+- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.C++.yaml/badge.svg) C/C++
+- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.Rust.yaml/badge.svg) Rust
 - [ ] Javascript (Rescript)
-- [ ] Rust
 - [ ] Golang
 - [ ] Python
 
