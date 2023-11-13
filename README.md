@@ -7,22 +7,15 @@
 ## Introduction
 This project provides minimalist cache implementations in various languages/platforms:
 
-- [x] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.JVM.yaml/badge.svg) JVM (Scala)
-- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.NET.yaml/badge.svg) .NET (F#)
-- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.OCaml.yaml/badge.svg) OCaml
-- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.C++.yaml/badge.svg) C/C++
-- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.Rust.yaml/badge.svg) Rust
+- [x] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.JVM.yaml/badge.svg) [JVM (Scala)](./Cache-Lite.JVM/)
+- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.NET.yaml/badge.svg) [.NET (F#)](./Cache-Lite.NET/)
+- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.OCaml.yaml/badge.svg) [OCaml](./Cache-Lite.OCaml/)
+- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.C++.yaml/badge.svg) [C/C++](./Cache-Lite.C++/)
+- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.Rust.yaml/badge.svg) [Rust](./Cache-Lite.Rust/)
+- [ ] ![ci](https://github.com/muqiuhan/cache-lite/actions/workflows/Cache-Lite.Racket.yaml/badge.svg) [Racket](./Cache-Lite.Racket/)
 - [ ] Javascript (Rescript)
 - [ ] Golang
 - [ ] Python
-
-__Algorithms:__
-- Perpetual
-- LRU
-- Expirable
-- FIFO
-- Soft
-- Weak
 
 ## LICENSE
 The MIT License (MIT)
