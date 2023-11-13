@@ -41,8 +41,7 @@ class FIFOTest extends munit.FunSuite:
     for (i <- 0 to 99) do
       if i < (100 - 31) then
         assertEquals[Option[Int], Option[Int]](None, cache.get(i))
-      else
-        assertNotEquals[Option[Int], Option[Int]](None, cache.get(i))
+      else assertNotEquals[Option[Int], Option[Int]](None, cache.get(i))
   }
 
   test("Should remove entry") {
