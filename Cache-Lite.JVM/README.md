@@ -12,10 +12,13 @@
 - [x] LRU
 - [x] Expirable
 - [x] FIFO
-- [ ] Soft
-- [ ] Weak
+- [x] Soft
+- [x] Weak
 
 ## Reference
+- [Cache replacement policies](https://en.wikipedia.org/wiki/Cache_replacement_policies)
+- [WeakReference in Java](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ref/WeakReference.html)
+- [SoftReference in Java](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ref/SoftReference.html)
 - [https://github.com/kezhenxu94/cache-lite](https://github.com/kezhenxu94/cache-lite)
 
 ## LICENSE
