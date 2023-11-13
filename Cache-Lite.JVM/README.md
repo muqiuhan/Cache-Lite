@@ -10,8 +10,8 @@
 
 - [x] Perpetual
 - [x] LRU
-- [ ] Expirable
-- [ ] FIFO
+- [x] Expirable
+- [x] FIFO
 - [ ] Soft
 - [ ] Weak
 

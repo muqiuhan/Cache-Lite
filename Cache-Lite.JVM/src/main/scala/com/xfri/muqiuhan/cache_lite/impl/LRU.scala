@@ -48,7 +48,7 @@ class LRU[K, V](
         tooManyCachedItems
     }
 
-  override def size(): Int = cache.size()
+  override def size(): Int = delegate.size()
 
   override def get(key: K): Option[V] =
     cache.get(key).asInstanceOf[Boolean | Null] match

@@ -24,19 +24,19 @@
 
 package com.xfri.muqiuhan.cache_lite.impl
 
-class WeakTest extends munit.FunSuite:
+class SoftTest extends munit.FunSuite:
   test("Should clear unreachable items") {
     val cache = Weak[Int, Array[Byte]](Perpetual())
-    val size = 1024
+    val size = 2048 * 2
 
     {
       for (i <- 0 to size) do
-        cache.set(i, new Array[Byte](WeakTest.ONE_MEGABYTE))
+        cache.set(i, new Array[Byte](SoftTest.ONE_MEGABYTE))
     }
 
     System.gc()
     assert(cache.size() < size)
   }
 
-object WeakTest:
+object SoftTest:
   val ONE_MEGABYTE = 1024 * 1024
